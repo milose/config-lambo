@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+echo 'Installing Composer Dependencies'
+composer require --dev \
+    ahuggins/open-on-make \
+    barryvdh/laravel-debugbar \
+    beyondcode/laravel-self-diagnosis
+
+echo '' >> $PROJECTPATH/.env
+echo 'OPEN_ON_MAKE_EDITOR=code' >> $PROJECTPATH/.env
+echo 'OPEN_ON_MAKE_ENABLED=true' >> $PROJECTPATH/.env
+echo '' >> $PROJECTPATH/.env.example
+echo 'OPEN_ON_MAKE_EDITOR=code' >> $PROJECTPATH/.env.example
+echo 'OPEN_ON_MAKE_ENABLED=true' >> $PROJECTPATH/.env.example
+
+echo 'Copying Include Files'
+cp -R ~/.lambo/incudes/ $PROJECTPATH
+
+echo 'Adding Develpment Git Hook'
+cp ~/.lambo/includes/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
+
+echo 'Committing after modifications to Git'
+git add --all .
+git commit -m 'Lambo after script.'
