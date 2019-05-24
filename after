@@ -28,6 +28,9 @@ cp -R ~/.lambo/includes/ $PROJECTPATH
 echo 'Adding Develpment Git Hook'
 cp ~/.lambo/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
 
-echo 'Committing after modifications to Git'
+echo 'Removing Twitter Bootstrap and Using Vue.js Only'
+php artisan preset none && php artisan preset vue
+
+echo 'Committing modifications to Git'
 git add --all .
 git commit -m 'Lambo after script.'
