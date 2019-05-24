@@ -17,7 +17,7 @@ echo 'Copying Include Files'
 cp -R ~/.lambo/incudes/ $PROJECTPATH
 
 echo 'Adding Develpment Git Hook'
-cp ~/.lambo/includes/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
+cp ~/.lambo/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
 
 echo 'Committing after modifications to Git'
 git add --all .
