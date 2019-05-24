@@ -6,6 +6,12 @@ composer require --dev \
     barryvdh/laravel-debugbar \
     beyondcode/laravel-self-diagnosis
 
+echo 'Installing Linting and Styling Dependencies'
+yarn add --dev eslint eslint-config-prettier eslint-config-prettier-standard \
+    eslint-config-standard eslint-plugin-import eslint-plugin-node \
+    eslint-plugin-prettier eslint-plugin-promise eslint-plugin-standard \
+    eslint-plugin-vue prettier prettier-eslint prettier-standard 
+
 echo '' >> $PROJECTPATH/.env
 echo 'OPEN_ON_MAKE_EDITOR=code' >> $PROJECTPATH/.env
 echo 'OPEN_ON_MAKE_ENABLED=true' >> $PROJECTPATH/.env
