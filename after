@@ -31,6 +31,9 @@ cp ~/.lambo/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
 echo 'Removing Twitter Bootstrap and Using Vue.js Only'
 php artisan preset none && php artisan preset vue
 
+echo 'Re-run Yarn'
+yarn && yarn dev
+
 echo 'Committing modifications to Git'
 git add --all .
 git commit -m 'Lambo after script.'
