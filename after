@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 echo 'Installing Composer Dependencies'
+composer require guzzlehttp/guzzle
+
+echo 'Installing Composer Developer Dependencies'
 composer require --dev \
     ahuggins/open-on-make \
     barryvdh/laravel-debugbar \
