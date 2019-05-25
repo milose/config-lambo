@@ -4,13 +4,15 @@ green=$(tput setaf 2)
 reset=$(tput sgr0)
 
 echo "${green}Installing Composer Dependencies${reset}"
-composer require guzzlehttp/guzzle
+composer require guzzlehttp/guzzle \
+    beyondcode/laravel-self-diagnosis
 
 echo "${green}Installing Composer Developer Dependencies${reset}"
 composer require --dev \
     ahuggins/open-on-make \
-    barryvdh/laravel-debugbar \
-    beyondcode/laravel-self-diagnosis
+    laravel/telescope
+
+php artisan telescope:install
 
 echo "${green}Adding Linting and Styling Dependencies${reset}"
 # yarn add eslint eslint-config-prettier eslint-config-prettier-standard \
