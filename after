@@ -4,15 +4,11 @@ green=$(tput setaf 2)
 reset=$(tput sgr0)
 
 echo "${green}Installing Composer Dependencies${reset}"
-composer require guzzlehttp/guzzle \
-    beyondcode/laravel-self-diagnosis
+#
 
 echo "${green}Installing Composer Developer Dependencies${reset}"
-composer require --dev \
-    ahuggins/open-on-make \
-    laravel/telescope
-
-php artisan telescope:install
+composer require --dev  barryvdh/laravel-ide-helper
+php artisan ide-helper:generate
 
 echo "${green}Adding Linting and Styling Dependencies${reset}"
 # yarn add eslint eslint-config-prettier eslint-config-prettier-standard \
@@ -20,40 +16,34 @@ echo "${green}Adding Linting and Styling Dependencies${reset}"
 #     eslint-plugin-prettier eslint-plugin-promise eslint-plugin-standard \
 #     eslint-plugin-vue prettier prettier-eslint prettier-standard \
 #     vue-template-compiler --dev --production=false
-echo "const fs = require('fs');\
-    const name = 'package.json';\
-    const data = JSON.parse(fs.readFileSync(name, 'utf8'));\
-    data.devDependencies['eslint']='^5';\
-    data.devDependencies['eslint-config-prettier']='^2';\
-    data.devDependencies['eslint-config-prettier-standard']='^2';\
-    data.devDependencies['eslint-config-standard']='^11';\
-    data.devDependencies['eslint-plugin-import']='^2';\
-    data.devDependencies['eslint-plugin-node']='^9';\
-    data.devDependencies['eslint-plugin-prettier']='^2.6';\
-    data.devDependencies['eslint-plugin-promise']='^4';\
-    data.devDependencies['eslint-plugin-standard']='^4';\
-    data.devDependencies['eslint-plugin-vue']='^5';\
-    data.devDependencies['prettier']='^1';\
-    data.devDependencies['prettier-eslint']='^8';\
-    data.devDependencies['prettier-standard']='^9';\
-    data.devDependencies['vue-template-compiler']='^2';\
-    fs.writeFileSync(name, JSON.stringify(data, null, 2))" | node
-
-echo '' >> $PROJECTPATH/.env
-echo 'OPEN_ON_MAKE_EDITOR=code' >> $PROJECTPATH/.env
-echo 'OPEN_ON_MAKE_ENABLED=true' >> $PROJECTPATH/.env
-echo '' >> $PROJECTPATH/.env.example
-echo 'OPEN_ON_MAKE_EDITOR=code' >> $PROJECTPATH/.env.example
-echo 'OPEN_ON_MAKE_ENABLED=true' >> $PROJECTPATH/.env.example
+# echo "const fs = require('fs');\
+#     const name = 'package.json';\
+#     const data = JSON.parse(fs.readFileSync(name, 'utf8'));\
+#     data.devDependencies['eslint']='^5';\
+#     data.devDependencies['eslint-config-prettier']='^2';\
+#     data.devDependencies['eslint-config-prettier-standard']='^2';\
+#     data.devDependencies['eslint-config-standard']='^11';\
+#     data.devDependencies['eslint-plugin-import']='^2';\
+#     data.devDependencies['eslint-plugin-node']='^9';\
+#     data.devDependencies['eslint-plugin-prettier']='^2.6';\
+#     data.devDependencies['eslint-plugin-promise']='^4';\
+#     data.devDependencies['eslint-plugin-standard']='^4';\
+#     data.devDependencies['eslint-plugin-vue']='^5';\
+#     data.devDependencies['prettier']='^1';\
+#     data.devDependencies['prettier-eslint']='^8';\
+#     data.devDependencies['prettier-standard']='^9';\
+#     data.devDependencies['prettier-stylelint']='^0.4';\
+#     data.devDependencies['vue-template-compiler']='^2';\
+#     fs.writeFileSync(name, JSON.stringify(data, null, 2))" | node
 
 echo "${green}Copying Include Files${reset}"
 cp -R ~/.lambo/includes/ $PROJECTPATH
 
-echo "${green}Adding Develpment Git Hook${reset}"
-cp ~/.lambo/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
+# echo "${green}Adding Develpment Git Hook${reset}"
+# cp ~/.lambo/resources/hooks/post-merge-dev.sh $PROJECTPATH/.git/hooks/post-merge
 
-echo "${green}Removing Twitter Bootstrap and Using Vue.js Only${reset}"
-php artisan preset none && php artisan preset vue
+# echo "${green}Removing Twitter Bootstrap and Using Vue.js Only${reset}"
+# php artisan preset none && php artisan preset vue
 
 echo "${green}Committing modifications to Git${reset}"
 git add --all .
